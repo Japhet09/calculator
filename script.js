@@ -13,10 +13,17 @@ clear.classList.add('clear')
 clear.innerText = 'CLEAR'
 container.appendChild(clear)
 
+//Create a % element
+const percent = document.createElement('div')
+percent.classList.add('percent')
+percent.innerText = '%'
+container.appendChild(percent)
+
 //Create calculator numbers
 for(i=9;i>=0;i--){
     const num= document.createElement('div')
     num.classList.add('number')
+    num.classList.add(`number${i}`)
     num.innerText = `${i}`
     container.appendChild(num)
 }
@@ -35,7 +42,9 @@ const operators = ['/', 'x', '-','+', '=']
 
 for(i=0;i<operators.length;i++){
     const operator = document.createElement('div')
-    operator.classList.add('operator', `operator${operators[i]}`)
+    operator.classList.add('operator')
+    operator.classList.add(`operator${[i]}`)
+
     operator.innerText = `${operators[i]}`
     container.appendChild(operator)
 }
