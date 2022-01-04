@@ -48,3 +48,23 @@ for(i=0;i<operators.length;i++){
     operator.innerText = `${operators[i]}`
     container.appendChild(operator)
 }
+
+//add function: add two numbers
+function add(number1,number2){
+    return number1 + number2
+}
+
+//substract two numbers
+function substract(number1,number2){
+    return number1 - number2
+}
+
+// multiply two numbers
+function multiply(number1,number2){
+    return number1 * number2
+}
+
+//divide two numbers
+function divide(number1,number2){
+    return number1 / number2
+}
