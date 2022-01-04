@@ -30,13 +30,14 @@ for(i=9;i>=0;i--){
 //Create decimal point  
 const decimal = document.createElement('div')
 decimal.classList.add('decimal')
+decimal.classList.add('number')
 decimal.innerText = '.'
 container.appendChild(decimal)
 
 
 
 // A list of operators
-const operators = ['/', 'x', '-','+', '=']
+const operators = ['/', 'x', '-','+']
 
 // create element for each operator and append to the calculator
 
@@ -48,6 +49,11 @@ for(i=0;i<operators.length;i++){
     operator.innerText = `${operators[i]}`
     container.appendChild(operator)
 }
+//add equal sign
+const equalSign = document.createElement('div')
+equalSign.classList.add('equal', 'operator4')
+equalSign.innerText = '='
+container.appendChild(equalSign)
 
 //add function: add two numbers
 function add(number1,number2){
@@ -89,4 +95,17 @@ function operator(number1, operator, number2){
             break;
     }
     
+}
+
+//select all numbers and decimal
+const numbers = document.querySelectorAll('.number')
+
+//add an event listener on each number to be added to the display on click
+let storedNumber;
+for(let number of numbers){
+    number.addEventListener('click',event=>{
+       
+        display.innerText = parseInt(display.innerText + number.innerText)
+        storedNumber = display.innerText
+    })
 }
