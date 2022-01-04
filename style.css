@@ -19,7 +19,7 @@ body{
 
 
 }
-.number, .operator, .decimal, .display, .clear, .percent{
+.number, .operator, .decimal, .display, .clear, .percent, .equal{
     border: 1px solid #457b9d;
     font-size: 30px;
     padding: 15px;
