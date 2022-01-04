@@ -1,0 +1,1 @@
+A simple calculator with basic functionality ( add,substract, multiply and divide)
