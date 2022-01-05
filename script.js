@@ -77,7 +77,7 @@ function divide(number1,number2){
 
 //operator function, can call any of the above function dependin on operator
 
-function operator(number1, operator, number2){
+function operatorFunc(number1, operator, number2){
     
 
     switch(operator){
@@ -101,11 +101,13 @@ function operator(number1, operator, number2){
 const numbers = document.querySelectorAll('.number')
 
 //add an event listener on each number to be added to the display on click
-let storedNumber;
+let firstNumber = 0;
+let secondNumber = 0
 for(let number of numbers){
     number.addEventListener('click',event=>{
        
         display.innerText = parseInt(display.innerText + number.innerText)
-        storedNumber = display.innerText
+        firstNumber = display.innerText
     })
 }
+
