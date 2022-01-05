@@ -4,7 +4,7 @@ const container = document.querySelector('.container')
 //Create calculator display
 const display = document.createElement('div')
 display.classList.add('display')
-display.innerText = 0;
+display.innerText = '';
 container.appendChild(display)
 
 //create clear button
@@ -97,17 +97,48 @@ function operatorFunc(number1, operator, number2){
     
 }
 
-//select all numbers and decimal
+
+//state variables
+let firstNumber = ''
+let secondNumber = ''
+let currentOperator = ''
+let result = ''
+
+//
+
+//select all numbers 
 const numbers = document.querySelectorAll('.number')
 
-//add an event listener on each number to be added to the display on click
-let firstNumber = 0;
-let secondNumber = 0
+//set event listener for each number and update screen display
 for(let number of numbers){
-    number.addEventListener('click',event=>{
-       
-        display.innerText = parseInt(display.innerText + number.innerText)
-        firstNumber = display.innerText
+    number.addEventListener('click', event=>{
+        display.innerText =  Number(display.innerText) + event.target.innerText
+        firstNumber = (display.innerText)
+
+    })
+    
+}
+
+
+//select all operators and assign event listener
+const allOperators = document.querySelectorAll('.operator')
+for(let operator of allOperators){
+    operator.addEventListener('click',event=>{
+        display.innerText = ''
+        currentOperator = event.target.innerText
+        if(firstNumber&&currentOperator){
+            secondNumber =display.innerText
+        }
     })
 }
 
+//sset event listener on equal sign
+equalSign.addEventListener('click',event=>{
+    if(firstNumber &&currentOperator){
+        secondNumber = display.innerText
+    }else{
+        firstNumber = display.innerText
+
+    }
+
+})
