@@ -37,7 +37,7 @@ for(i=9;i>=0;i--){
 //Create decimal point  
 const decimal = document.createElement('div')
 decimal.classList.add('decimal')
-decimal.classList.add('number')
+//decimal.classList.add('number')
 decimal.innerText = '.'
 container.appendChild(decimal)
 
@@ -119,7 +119,7 @@ const numbers = document.querySelectorAll('.number')
 //set event listener for each number and update screen display
     for(let number of numbers){
         number.addEventListener('click', event=>{
-            display.innerText = (display.innerText + event.target.innerText)
+            display.innerText = Number(display.innerText + event.target.innerText)
             console.log(event.target.innerText)
     
         })
@@ -130,6 +130,8 @@ const numbers = document.querySelectorAll('.number')
     decimal.addEventListener('click',handler=function(event){
         if (display.innerText.includes(event.target.innerText)){
             this.removeEventListener('click',handler)
+        }else{
+            display.innerText+=event.target.innerText
         }
        
     })
