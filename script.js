@@ -119,12 +119,20 @@ const numbers = document.querySelectorAll('.number')
 //set event listener for each number and update screen display
     for(let number of numbers){
         number.addEventListener('click', event=>{
-            display.innerText = Number(display.innerText + event.target.innerText)
-            
+            display.innerText = (display.innerText + event.target.innerText)
+            console.log(event.target.innerText)
     
         })
         
     }
+
+    //event listener on decimal
+    decimal.addEventListener('click',handler=function(event){
+        if (display.innerText.includes(event.target.innerText)){
+            this.removeEventListener('click',handler)
+        }
+       
+    })
 
 
 
@@ -158,4 +166,18 @@ equalSign.addEventListener('click',event=>{
     
 })
 
+clear.addEventListener('click',function (){
+    display.innerText = 0
+    currentNumber = ''
+    firstNumber = ''
+    currentOperator = ''
+    result = ''
+})
 
+cancel.addEventListener('click',()=>{
+    if((display.innerText).length===1){
+        display.innerText = 0
+    }else{
+        display.innerText = display.innerText.slice(0,-1)
+    }
+})
