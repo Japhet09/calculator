@@ -4,14 +4,21 @@ const container = document.querySelector('.container')
 //Create calculator display
 const display = document.createElement('div')
 display.classList.add('display')
-display.innerText = '';
+display.innerText = '0';
 container.appendChild(display)
 
 //create clear button
 const clear = document.createElement('div')
 clear.classList.add('clear')
-clear.innerText = 'CLEAR'
+clear.innerText = 'AC'
 container.appendChild(clear)
+
+
+//Create a delete button
+const cancel = document.createElement('div')
+cancel.classList.add('cancel')
+cancel.innerText = 'C'
+container.appendChild(cancel)
 
 //Create a % element
 const percent = document.createElement('div')
@@ -100,7 +107,7 @@ function operatorFunc(number1, operator, number2){
 
 //state variables
 let firstNumber = ''
-let secondNumber = ''
+let currentNumber= ''
 let currentOperator = ''
 let result = ''
 
@@ -110,35 +117,45 @@ let result = ''
 const numbers = document.querySelectorAll('.number')
 
 //set event listener for each number and update screen display
-for(let number of numbers){
-    number.addEventListener('click', event=>{
-        display.innerText =  Number(display.innerText) + event.target.innerText
-        firstNumber = (display.innerText)
-
-    })
+    for(let number of numbers){
+        number.addEventListener('click', event=>{
+            display.innerText = Number(display.innerText + event.target.innerText)
+            
     
-}
+        })
+        
+    }
+
 
 
 //select all operators and assign event listener
 const allOperators = document.querySelectorAll('.operator')
 for(let operator of allOperators){
     operator.addEventListener('click',event=>{
-        display.innerText = ''
+       
         currentOperator = event.target.innerText
-        if(firstNumber&&currentOperator){
-            secondNumber =display.innerText
+        if(firstNumber===''||currentOperator===''){
+            firstNumber = Number(display.innerText)
+            console.log('me')
+            if(firstNumber&&currentOperator){
+                display.innerText = 0
+                console.log( 'ififif')
+            }
         }
     })
 }
 
 //sset event listener on equal sign
 equalSign.addEventListener('click',event=>{
-    if(firstNumber &&currentOperator){
-        secondNumber = display.innerText
-    }else{
-        firstNumber = display.innerText
-
-    }
-
+    currentNumber = Number(display.innerText)
+    console.log('current number')
+    result = operatorFunc(firstNumber,currentOperator,currentNumber)
+    console.log(result)
+    display.innerText = result
+    firstNumber = ''
+    currentNumber = ''
+    currentOperator = ''
+    
 })
+
+
