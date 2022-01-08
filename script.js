@@ -107,7 +107,7 @@ function operate(number1, operator, number2){
 //* CALCULATOR OPERATIONS //
 
 //state variables
-let containDecimal = false;
+//let containDecimal = false;
 let storedNumber = '' ;
 let currentNumber = ''
 let currentOperator = '';
