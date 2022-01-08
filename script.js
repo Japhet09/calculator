@@ -109,6 +109,7 @@ function operatorFunc(number1, operator, number2){
 let firstNumber = ''
 let currentNumber= ''
 let currentOperator = ''
+let storedNumber  = ''
 let result = ''
 
 //
@@ -121,6 +122,8 @@ const numbers = document.querySelectorAll('.number')
         number.addEventListener('click', event=>{
             display.innerText = Number(display.innerText + event.target.innerText)
             console.log(event.target.innerText)
+            storedNumber = Number(display.innerText)
+
     
         })
         
@@ -146,40 +149,45 @@ for(let operator of allOperators){
         currentOperator = event.target.innerText
         if(firstNumber===''||currentOperator===''){
             firstNumber = Number(display.innerText)
-            console.log('me')
+            console.log('first if')
             if(firstNumber&&currentOperator){
                 display.innerText = 0
-                console.log( 'ififif')
+                console.log( 'if if')
             }
         }
     })
 }
 
 //sset event listener on equal sign
-equalSign.addEventListener('click',event=>{
+equalSign.addEventListener('click',mathOperation)
+
+function mathOperation(){
     currentNumber = Number(display.innerText)
     console.log('current number')
     result = operatorFunc(firstNumber,currentOperator,currentNumber)
     console.log(result)
     display.innerText = result
-    firstNumber = ''
-    currentNumber = ''
-    currentOperator = ''
-    
-})
+    firstNumber = result //incase there's chaining of operators
 
-clear.addEventListener('click',function (){
+
+}
+
+clear.addEventListener('click',clearFunc)
+
+function clearFunc(){
     display.innerText = 0
     currentNumber = ''
     firstNumber = ''
     currentOperator = ''
     result = ''
-})
+}
 
-cancel.addEventListener('click',()=>{
+cancel.addEventListener('click',cancelFunc)
+
+function cancelFunc(){
     if((display.innerText).length===1){
         display.innerText = 0
     }else{
         display.innerText = display.innerText.slice(0,-1)
     }
-})
+}
