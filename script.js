@@ -142,15 +142,16 @@ decimal.addEventListener('click',decimalPoint)
 
 //Function when opeerators are clicked
 function operatorFunc(){
-    if(!storedNumber){
+     if(!storedNumber){
         console.log('NO')
         storedNumber = displayValue
-        currentOperator = (this.innerText)
+        //currentOperator = (this.innerText)
         display.innerText = 0
     }else if(storedNumber&&currentOperator&&currentNumber){
         result = mathOperation()
         console.log('answer')
     }
+    currentOperator = (this.innerText)
     display.innerText = 0
 }
 //function when numbers are clicked
@@ -187,6 +188,7 @@ function mathOperation(){
     result = operate(Number(storedNumber),currentOperator,Number(currentNumber))
     display.innerText = result
     storedNumber = result
+    currentNumber = ''
     return result
 }
 //reset everything
