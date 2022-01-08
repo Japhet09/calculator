@@ -141,25 +141,26 @@ cancel.addEventListener('click',deleteFunc)
 decimal.addEventListener('click',decimalPoint)
 
 //Function when opeerators are clicked
-function operatorFunc(){
-     if(!storedNumber){
+function operatorFunc(){  
+    if(!storedNumber){
         console.log('NO')
         storedNumber = displayValue
         //currentOperator = (this.innerText)
-        display.innerText = 0
+        //display.innerText = 0
     }else if(storedNumber&&currentOperator&&currentNumber){
         result = mathOperation()
         console.log('answer')
     }
     currentOperator = (this.innerText)
     display.innerText = 0
+    console.log('lasr')
 }
 //function when numbers are clicked
 function numbersFunc(){
     displayValue = display.innerText + this.innerText
     display.innerText = Number(displayValue)
 
-    if(storedNumber&&currentOperator){
+    if(currentOperator){
         currentNumber = display.innerText
         console.log('yes')
     }      
