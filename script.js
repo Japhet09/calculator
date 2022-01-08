@@ -84,7 +84,7 @@ function divide(number1,number2){
 
 //operator function, can call any of the above function dependin on operator
 
-function operatorFunc(number1, operator, number2){
+function operate(number1, operator, number2){
     
 
     switch(operator){
@@ -116,46 +116,20 @@ let result = null;
 //let finalOperator = ''
 
 
-
-
-
 //select all numbers and add event listener
 const numbers = document.querySelectorAll('.number')
-console.dir(numbers)
 
 for(let number of numbers){
-    number.addEventListener('click', function(){
-        displayValue = display.innerText + number.innerText
-        display.innerText = Number(displayValue)
-
-        if(storedNumber&&currentOperator){
-            currentNumber = display.innerText
-            console.log('yes')
-        }      
-    })
+    number.addEventListener('click', numbersFunc)
     
 }
 
 //select all operators & add event listener
 const allOperators = document.querySelectorAll('.operator')
-console.dir(operators)
+
 for(let operator of allOperators){
-    operator.addEventListener('click',function(){
-        if(!storedNumber){
-            console.log('NO')
-            storedNumber = displayValue
-            currentOperator = (operator.innerText)
-            display.innerText = 0
-        }else if(storedNumber&&currentOperator&&currentNumber){
-            result = mathOperation()
-            console.log('answer')
-        }
-        display.innerText = 0
-    })
+    operator.addEventListener('click',operatorFunc)
 }
-
-
-
 
 
 equalSign.addEventListener('click', mathOperation)
@@ -166,6 +140,29 @@ cancel.addEventListener('click',deleteFunc)
 
 decimal.addEventListener('click',decimalPoint)
 
+//Function when opeerators are clicked
+function operatorFunc(){
+    if(!storedNumber){
+        console.log('NO')
+        storedNumber = displayValue
+        currentOperator = (this.innerText)
+        display.innerText = 0
+    }else if(storedNumber&&currentOperator&&currentNumber){
+        result = mathOperation()
+        console.log('answer')
+    }
+    display.innerText = 0
+}
+//function when numbers are clicked
+function numbersFunc(){
+    displayValue = display.innerText + this.innerText
+    display.innerText = Number(displayValue)
+
+    if(storedNumber&&currentOperator){
+        currentNumber = display.innerText
+        console.log('yes')
+    }      
+}
 
 //Restric up to 15 gits
 
@@ -178,7 +175,6 @@ function maxDigits(digits){
 ///Restrict to only one decimal value in a number
 function decimalPoint(){
     if(display.innerText.includes('.')){
-        
         return
     }
     display.innerText += this.innerText
@@ -186,10 +182,9 @@ function decimalPoint(){
 
 ///perform the operation
 function mathOperation(){
-    maxDigits()
     if(!storedNumber||!currentNumber||!currentOperator)return 
-    //inalOperator = console.log(this.innerText)
-    result = operatorFunc(Number(storedNumber),currentOperator,Number(currentNumber))
+    //finalOperator = console.log(this.innerText)
+    result = operate(Number(storedNumber),currentOperator,Number(currentNumber))
     display.innerText = result
     storedNumber = result
     return result
