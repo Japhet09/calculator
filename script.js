@@ -1,5 +1,5 @@
-//Query the containers  
-const container = document.querySelector('.container')
+//77´//* CALCULATOR INTERFACE////////
+ const container = document.querySelector('.container')
 
 //Create calculator display
 const display = document.createElement('div')
@@ -104,6 +104,7 @@ function operatorFunc(number1, operator, number2){
     
 }
 
+//* CALCULATOR OPERATIONS //
 
 //state variables
 let containDecimal = false;
@@ -112,41 +113,30 @@ let currentNumber = ''
 let currentOperator = '';
 let displayValue = '';
 let result = null;
-let finalOperator = ''
-
-//Restric up to 15 gits
-function maxDigits(){
-    let digits = display.innerText
-    if(digits.length>15){
-    return deleteFunc()
-    }
-
-
-}
-maxDigits()
+//let finalOperator = ''
 
 
 
-//select all numbers
+
+
+//select all numbers and add event listener
 const numbers = document.querySelectorAll('.number')
 console.dir(numbers)
 
 for(let number of numbers){
     number.addEventListener('click', function(){
-        maxDigits()
         displayValue = display.innerText + number.innerText
         display.innerText = Number(displayValue)
 
         if(storedNumber&&currentOperator){
             currentNumber = display.innerText
             console.log('yes')
-        }
-        
+        }      
     })
     
 }
 
-//select all operators
+//select all operators & add event listener
 const allOperators = document.querySelectorAll('.operator')
 console.dir(operators)
 for(let operator of allOperators){
@@ -157,10 +147,7 @@ for(let operator of allOperators){
             currentOperator = (operator.innerText)
             display.innerText = 0
         }else if(storedNumber&&currentOperator&&currentNumber){
-            
             result = mathOperation()
-            display.innerText = 0
-            
             console.log('answer')
         }
         display.innerText = 0
@@ -172,22 +159,23 @@ for(let operator of allOperators){
 
 
 equalSign.addEventListener('click', mathOperation)
+
 clear.addEventListener('click',clearFunc)
 
 cancel.addEventListener('click',deleteFunc)
+
 decimal.addEventListener('click',decimalPoint)
 
 
+//Restric up to 15 gits
 
-
-
-
-
-
-
-
-
-
+function maxDigits(digits){
+    digits = display.innerText
+    if(digits.length>15){
+    return deleteFunc()
+    }
+}
+///Restrict to only one decimal value in a number
 function decimalPoint(){
     if(display.innerText.includes('.')){
         
@@ -196,7 +184,9 @@ function decimalPoint(){
     display.innerText += this.innerText
 }
 
+///perform the operation
 function mathOperation(){
+    maxDigits()
     if(!storedNumber||!currentNumber||!currentOperator)return 
     //inalOperator = console.log(this.innerText)
     result = operatorFunc(Number(storedNumber),currentOperator,Number(currentNumber))
@@ -204,7 +194,7 @@ function mathOperation(){
     storedNumber = result
     return result
 }
-
+//reset everything
 function clearFunc(){
     display.innerText = 0
     currentNumber = ''
@@ -214,6 +204,7 @@ function clearFunc(){
     finalOperator = ''
 }
 
+//Delete last entry
 function deleteFunc(){
     if((display.innerText).length===1){
         display.innerText = 0
