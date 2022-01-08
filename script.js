@@ -17,7 +17,7 @@ container.appendChild(clear)
 //Create a delete button
 const cancel = document.createElement('div')
 cancel.classList.add('cancel')
-cancel.innerText = 'C'
+cancel.innerText = 'D'
 container.appendChild(cancel)
 
 //Create a % element
@@ -106,85 +106,115 @@ function operatorFunc(number1, operator, number2){
 
 
 //state variables
-let firstNumber = ''
-let currentNumber= ''
-let currentOperator = ''
-let storedNumber  = ''
-let result = ''
+let containDecimal = false;
+let storedNumber = '' ;
+let currentNumber = ''
+let currentOperator = '';
+let displayValue = '';
+let result = null;
+let finalOperator = ''
 
-//
-
-//select all numbers 
-const numbers = document.querySelectorAll('.number')
-
-//set event listener for each number and update screen display
-    for(let number of numbers){
-        number.addEventListener('click', event=>{
-            display.innerText = Number(display.innerText + event.target.innerText)
-            console.log(event.target.innerText)
-            storedNumber = Number(display.innerText)
-
-    
-        })
-        
+//Restric up to 15 gits
+function maxDigits(){
+    let digits = display.innerText
+    if(digits.length>15){
+    return clearFunc()
     }
 
-    //event listener on decimal
-    decimal.addEventListener('click',handler=function(event){
-        if (display.innerText.includes(event.target.innerText)){
-            this.removeEventListener('click',handler)
-        }else{
-            display.innerText+=event.target.innerText
+
+}
+maxDigits()
+
+
+
+//select all numbers
+const numbers = document.querySelectorAll('.number')
+console.dir(numbers)
+
+for(let number of numbers){
+    number.addEventListener('click', function(){
+        maxDigits()
+        displayValue = display.innerText + number.innerText
+        display.innerText = Number(displayValue)
+
+        if(storedNumber&&currentOperator){
+            currentNumber = display.innerText
+            console.log('yes')
         }
-       
+        
     })
+    
+}
 
-
-
-//select all operators and assign event listener
+//select all operators
 const allOperators = document.querySelectorAll('.operator')
+console.dir(operators)
 for(let operator of allOperators){
-    operator.addEventListener('click',event=>{
-       
-        currentOperator = event.target.innerText
-        if(firstNumber===''||currentOperator===''){
-            firstNumber = Number(display.innerText)
-            console.log('first if')
-            if(firstNumber&&currentOperator){
-                display.innerText = 0
-                console.log( 'if if')
-            }
+    operator.addEventListener('click',function(){
+        if(!storedNumber){
+            console.log('NO')
+            storedNumber = displayValue
+            currentOperator = (operator.innerText)
+            display.innerText = 0
+        }else if(storedNumber&&currentOperator&&currentNumber){
+            
+            result = mathOperation()
+            display.innerText = 0
+            
+            console.log('answer')
         }
+        display.innerText = 0
     })
 }
 
-//sset event listener on equal sign
-equalSign.addEventListener('click',mathOperation)
+
+
+
+
+equalSign.addEventListener('click', mathOperation)
+clear.addEventListener('click',clearFunc)
+
+cancel.addEventListener('click',deleteFunc)
+decimal.addEventListener('click',decimalPoint)
+
+
+
+
+
+
+
+
+
+
+
+
+function decimalPoint(){
+    if(display.innerText.includes('.')){
+        
+        return
+    }
+    display.innerText += this.innerText
+}
 
 function mathOperation(){
-    currentNumber = Number(display.innerText)
-    console.log('current number')
-    result = operatorFunc(firstNumber,currentOperator,currentNumber)
-    console.log(result)
+    if(!storedNumber||!currentNumber||!currentOperator)return 
+    //inalOperator = console.log(this.innerText)
+    result = operatorFunc(Number(storedNumber),currentOperator,Number(currentNumber))
     display.innerText = result
-    firstNumber = result //incase there's chaining of operators
-
-
+    storedNumber = result
+    return result
 }
-
-clear.addEventListener('click',clearFunc)
 
 function clearFunc(){
     display.innerText = 0
     currentNumber = ''
-    firstNumber = ''
+    storedNumber = ''
     currentOperator = ''
-    result = ''
+    result = null
+    finalOperator = ''
 }
 
-cancel.addEventListener('click',cancelFunc)
-
-function cancelFunc(){
+function deleteFunc(){
     if((display.innerText).length===1){
         display.innerText = 0
     }else{

@@ -7,16 +7,16 @@ body{
 }
 .container{
     display: grid;
-    grid-template-columns: repeat(4, auto);
-    grid-template-rows:repeat(4,auto);
-    width: 350px;
-  height:450px;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows:repeat(4,1fr);
+    width:;
+  height:420px;
 
     background-color: #1d3557;
     border: 5px solid #1d3557;
     color: #ddd8d8;
 }
-.number, .operator, .decimal, .display, .clear, .percent, .equal, .cancel{
+.number, .operator, .decimal, .display, .clear, .percent, .equal, .cancel {
     border: 1px solid #457b9d;
     font-size: 30px;
     padding: 15px;
@@ -36,6 +36,9 @@ body{
 .operator{
     background-color:#11476b;
 }
+.operator:focus {
+    background-color: red;
+}
 .display{
     margin: 0 0 0 0;
     padding: 20px;
@@ -45,9 +48,12 @@ body{
 }
 
 .display{
-align-items: flex-end;
-    grid-column: 1/5;
-}
+
+    align-items: flex-end;
+        grid-column: 1/5;
+        grid-row: 1;
+    }
+
 .clear{
     grid-column: 1/2;
     background-color:rgb(224, 110, 110);
