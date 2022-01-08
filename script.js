@@ -118,7 +118,7 @@ let finalOperator = ''
 function maxDigits(){
     let digits = display.innerText
     if(digits.length>15){
-    return clearFunc()
+    return deleteFunc()
     }
 
 

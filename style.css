@@ -36,9 +36,6 @@ body{
 .operator{
     background-color:#11476b;
 }
-.operator:focus {
-    background-color: red;
-}
 .display{
     margin: 0 0 0 0;
     padding: 20px;
